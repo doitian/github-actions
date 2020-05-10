@@ -1,0 +1,23 @@
+name: Project Card
+on:
+  project_card:
+    types: [created, converted, moved, deleted]
+
+jobs:
+  project_card:
+    runs-on: ubuntu-latest
+    name: Backport
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+
+    - name: bundle install
+      run: bundle install --local
+
+    - name: run ruby script
+      run: bundle exec ruby project_card.rb
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
