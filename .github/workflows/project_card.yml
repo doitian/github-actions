@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Project Card Automation
     steps:
+    - run: cat "$GITHUB_EVENT_PATH"
+
     - uses: actions/checkout@v2
 
     - uses: actions/setup-ruby@v1
