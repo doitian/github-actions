@@ -6,6 +6,7 @@ require 'set'
 
 github = Octokit::Client.new(access_token: ENV['GITHUB_TOKEN'])
 github.auto_paginate = true
+preview_header = { accept: 'application/vnd.github.inertia-preview+json' }
 
 payload = File.open(ENV['GITHUB_EVENT_PATH']) do |f|
   JSON.load(f)
@@ -15,7 +16,7 @@ repo_id = payload['repository']['id']
 project_card = Sawyer::Resource.new(github.agent, payload['project_card'])
 return if project_card.content_url.nil?
 issue_number = project_card.content_url.split('/').last
-project = project_card.rels[:project].get
+project = project_card.rels[:project].get(headers: preview_header)
 
 labels = {
   'created' => Set.new,
@@ -70,7 +71,7 @@ when 'created', 'deleted'
 end
 
 if payload['action'] != 'deleted'
-  column = project_card.rels[:column].get
+  column = project_card.rels[:column].get(headers: preview_header)
   label = col_to_label[column]
   if !label.nil?
     labels['created'] << label

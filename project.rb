@@ -32,8 +32,8 @@ when 'edited'
 
   if before != after
     project = Sawyer::Resource.new(github.agent, payload['project'])
-    project.rels['columns'].get.each do |col|
-      col.rels['cards'].get.each do |card|
+    project.rels['columns'].get(headers: preview_header).each do |col|
+      col.rels['cards'].get(headers: preview_header).each do |card|
         issue_number = card.content_url.split('/').last
         if !before.nil?
           github.remove_label(repo_id, issue_number, before)
