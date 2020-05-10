@@ -89,12 +89,12 @@ if labels['created'].size > 0
   github.add_labels_to_an_issue(repo_id, issue_number, labels['created'].to_a)
 end
 
-if labels['removed'].size > 0
+if labels['deleted'].size > 0
   existing_labels = github.labels_for_issue(repo_id, issue_number).map(&:name)
-  labels['removed'] = labels['removed'] & existing_labels
+  labels['deleted'] = labels['deleted'] & existing_labels
 end
 
-labels['removed'].each do |label|
+labels['deleted'].each do |label|
   begin
     github.remove_label(repo_id, issue_number, label)
   rescue Octokit::NotFound
