@@ -22,6 +22,7 @@ labels = {
   'created' => Set.new,
   'deleted' => Set.new
 }
+labels['converted'] = labels['created']
 
 col_to_label = {
   'Triage' => 's:triage',
@@ -46,7 +47,7 @@ mutually_exclusive_labels = {}
 end
 
 case payload['action']
-when 'created', 'deleted'
+when 'created', 'deleted', 'converted'
   case project.name
   when /^[12]\./
     labels[payload['action']] << 'sprint'
