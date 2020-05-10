@@ -1,6 +1,6 @@
 name: Project
 on:
-  project_card:
+  project:
     types: [edited]
 
 jobs:
