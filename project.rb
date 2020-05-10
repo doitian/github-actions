@@ -37,7 +37,11 @@ when 'edited'
       col.rels['cards'].get(headers: preview_header).data.each do |card|
         issue_number = card.content_url.split('/').last
         if !before.nil?
-          github.remove_label(repo_id, issue_number, before)
+          begin
+            github.remove_label(repo_id, issue_number, before)
+          rescue Octokit::NotFound
+            # ignore
+          end
         end
         if !after.nil?
           github.add_labels_to_an_issue(repo_id, issue_number, [after])
