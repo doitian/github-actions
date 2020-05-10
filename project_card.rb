@@ -85,8 +85,8 @@ labels['created'].each do |added|
   end
 end
 
-if labels['added'].size > 0
-  github.add_labels_to_an_issue(repo_id, issue_number, labels['added'].to_a)
+if labels['created'].size > 0
+  github.add_labels_to_an_issue(repo_id, issue_number, labels['created'].to_a)
 end
 
 if labels['removed'].size > 0
