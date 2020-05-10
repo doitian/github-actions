@@ -4,9 +4,9 @@ on:
     types: [created, converted, moved, deleted]
 
 jobs:
-  project_card:
+  project_card_automation:
     runs-on: ubuntu-latest
-    name: Backport
+    name: Project Card Automation
     steps:
     - uses: actions/checkout@v2
 

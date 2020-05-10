@@ -4,9 +4,9 @@ on:
     types: [edited]
 
 jobs:
-  project_card:
+  project_automation:
     runs-on: ubuntu-latest
-    name: Backport
+    name: Project Automation
     steps:
     - uses: actions/checkout@v2
 
