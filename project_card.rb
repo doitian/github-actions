@@ -86,12 +86,17 @@ labels['created'].each do |added|
 end
 
 if labels['created'].size > 0
+  puts "==> add labels: #{labels['created'].to_a.join(', ')}"
   github.add_labels_to_an_issue(repo_id, issue_number, labels['created'].to_a)
 end
 
 if labels['deleted'].size > 0
   existing_labels = github.labels_for_issue(repo_id, issue_number).map(&:name)
   labels['deleted'] = labels['deleted'] & existing_labels
+end
+
+if labels['deleted'].size > 0
+  puts "==> remove labels: #{labels['created'].to_a.join(', ')}"
 end
 
 labels['deleted'].each do |label|

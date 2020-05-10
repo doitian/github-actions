@@ -31,6 +31,7 @@ when 'edited'
   end
 
   if before != after
+    puts "==> change all cards in #{payload['project']['name']}: #{before} => #{after}"
     project = Sawyer::Resource.new(github.agent, payload['project'])
     project.rels['columns'].get(headers: preview_header).each do |col|
       col.rels['cards'].get(headers: preview_header).each do |card|
