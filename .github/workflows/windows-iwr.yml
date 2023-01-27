@@ -1,0 +1,14 @@
+name: Windows IWR
+env:
+  CKB_CLI_VERSION: v1.3.0
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: windows-2019
+    steps:
+      - name: Download ckb-cli
+        shell: pwsh
+        run: |
+          echo "https://github.com/nervosnetwork/ckb-cli/releases/download/$($env:CKB_CLI_VERSION)/ckb-cli_$($env:CKB_CLI_VERSION)_x86_64-pc-windows-msvc.zip"
+          iwr -useb "https://github.com/nervosnetwork/ckb-cli/releases/download/$($env:CKB_CLI_VERSION)/ckb-cli_$($env:CKB_CLI_VERSION)_x86_64-pc-windows-msvc.zip" -outfile "ckb-cli_$($env:CKB_CLI_VERSION)_x86_64-pc-windows-msvc.zip"
